@@ -13,7 +13,7 @@ struct TaskDetailView: View {
                 Text(task.name).font(.headline)
                 if !task.description.isEmpty { Text(task.description) }
                 Picker("Status", selection: Binding(get: { task.status }, set: { task.status = $0; store.updateTask(task) })) {
-                    ForEach(TaskStatus.allCases, id: \.self) { s in Text(String(describing: s.rawValue)).tag(s) }
+                    ForEach(TaskStatus.allCases, id: \.self) { s in Text(s.rawValue.capitalized).tag(s) }
                 }
             }
 

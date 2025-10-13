@@ -9,10 +9,12 @@ import SwiftUI
 
 @main
 struct TasplaApp: App {
+    // Keep a single store instance for the app lifetime.
+    @StateObject private var store = AppStore()
     var body: some Scene {
         WindowGroup {
             RootView()
-                .environmentObject(AppStore())
+                .environmentObject(store)
         }
     }
 }

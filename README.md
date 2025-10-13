@@ -10,14 +10,14 @@ Taspla (TASk PLAnner) is a native iOS app (SwiftUI) for values‑aligned plannin
 
 ## Quick Start
 
-1) Open `Taspla.xcodeproj` in Xcode 16.
+1) Open `Taspla.xcodeproj` in Xcode 16 or later.
 2) Add the local package dependency:
    - File → Add Package Dependencies… → Add Local… → select `terry-code/packages/AppCore`
 3) Add the sample UI (optional, for a working app shell):
    - Drag `terry-code/samples/POCApp/Views` and `terry-code/samples/POCApp/Data/AppStore.swift` into the Taspla target (copy if needed).
 4) Update the app entry to show the POC root:
    - In `Taspla/TasplaApp.swift`, render `RootView().environmentObject(AppStore())`.
-5) Build and run (iOS 16+).
+5) Build and run (iOS 18.6 – iOS 26).
 
 Tip: The project uses file‑system‑synced groups, so any `.swift` you add under `Taspla/` will be included automatically in the target.
 
@@ -45,4 +45,3 @@ Tip: The project uses file‑system‑synced groups, so any `.swift` you add und
 - EventKit integration to write directly to Calendar
 - Real LLM provider behind `LLMService`
 - Expand recurrence (RRULE variants), DST/timezone edges, and calendar UI
-

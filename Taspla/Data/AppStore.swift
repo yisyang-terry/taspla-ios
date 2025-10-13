@@ -1,6 +1,7 @@
 import Foundation
 import AppCore
 import SwiftUI
+internal import Combine
 
 @MainActor
 final class AppStore: ObservableObject {

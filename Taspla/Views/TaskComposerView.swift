@@ -9,6 +9,7 @@ struct TaskComposerView: View {
     @State private var tasksText: String = ""
     @State private var selectedValue: Value?
     @State private var isLoadingAI = false
+    @State private var aiTrigger: Int = 0
 
     let llm: LLMService = MockLLMService()
 
@@ -30,7 +31,7 @@ struct TaskComposerView: View {
                         .frame(minHeight: 120)
                 }
                 HStack {
-                    Button("Generate with AI") { Task { await generateWithAI() } }
+                    Button("Generate with AI") { aiTrigger += 1 }
                         .disabled(selectedGoal == nil || isLoadingAI)
                     Spacer()
                     Button("Add") { add() }.disabled(selectedGoal == nil || epicName.isEmpty || tasksText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
@@ -38,6 +39,7 @@ struct TaskComposerView: View {
             }
             .navigationTitle("Composer")
         }
+        .task(id: aiTrigger) { await generateWithAI() }
     }
 
     func add() {

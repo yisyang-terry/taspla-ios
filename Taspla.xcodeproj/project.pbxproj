@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		74FA05E52E9CD76A00A073F2 /* AppCore in Frameworks */ = {isa = PBXBuildFile; productRef = 74FA05E42E9CD76A00A073F2 /* AppCore */; };
+		74FA05FD2E9CDE1A00A073F2 /* HUMAN_TASKS.md in Resources */ = {isa = PBXBuildFile; fileRef = 74FA05FC2E9CDE1A00A073F2 /* HUMAN_TASKS.md */; };
+		74FA05FF2E9CDE2200A073F2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 74FA05FE2E9CDE2200A073F2 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +33,8 @@
 		74B824692E9CD092001D3355 /* Taspla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taspla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74B8247A2E9CD095001D3355 /* TasplaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TasplaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		74B824842E9CD095001D3355 /* TasplaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TasplaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		74FA05FC2E9CDE1A00A073F2 /* HUMAN_TASKS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = HUMAN_TASKS.md; sourceTree = "<group>"; };
+		74FA05FE2E9CDE2200A073F2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -93,6 +97,8 @@
 		74B824602E9CD092001D3355 = {
 			isa = PBXGroup;
 			children = (
+				74FA05FC2E9CDE1A00A073F2 /* HUMAN_TASKS.md */,
+				74FA05FE2E9CDE2200A073F2 /* README.md */,
 				74B8246B2E9CD092001D3355 /* Taspla */,
 				74B8247D2E9CD095001D3355 /* TasplaTests */,
 				74B824872E9CD095001D3355 /* TasplaUITests */,
@@ -234,6 +240,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74FA05FF2E9CDE2200A073F2 /* README.md in Resources */,
+				74FA05FD2E9CDE1A00A073F2 /* HUMAN_TASKS.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

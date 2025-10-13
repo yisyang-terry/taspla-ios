@@ -1,8 +1,18 @@
 import Foundation
 
+/// Generates calendar events from `Schedule` definitions.
+/// - Note: This service intentionally keeps logic simple and predictable
+///   for daily/weekly/monthly recurrences. Edge cases like DST shifts are
+///   handled by `Calendar`.
 public struct SchedulingService: Sendable {
     public init() {}
 
+    /// Expand a single schedule into concrete events.
+    /// - Parameters:
+    ///   - schedule: The schedule to expand.
+    ///   - interval: Optional filter window. If provided, only events that
+    ///     intersect this window are returned.
+    /// - Returns: Sorted events by start date.
     public func events(for schedule: Schedule, within interval: DateInterval? = nil) -> [Event] {
         var result: [Event] = []
         let cal = DateHelpers.calendar
@@ -41,12 +51,20 @@ public struct SchedulingService: Sendable {
         }
 
         if schedule.isRecurring, let freq = schedule.frequency, let until = schedule.endDate {
+            // Guard against invalid ranges to avoid accidental infinite loops.
+            guard schedule.startDate <= until else { return [] }
+
             var current = schedule.startDate
-            while current <= until {
+            // Conservative upper bound to prevent runaway generation for
+            // extremely long ranges (e.g., years of daily events).
+            var safetyCounter = 0
+            let safetyLimit = 10000
+            while current <= until, safetyCounter < safetyLimit {
                 if let ev = makeEvent(on: current) {
                     result.append(ev)
                 }
                 current = advance(date: current, by: freq)
+                safetyCounter += 1
             }
         } else {
             if let ev = makeEvent(on: schedule.startDate) { result.append(ev) }

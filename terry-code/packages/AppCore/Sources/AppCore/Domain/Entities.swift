@@ -1,5 +1,6 @@
 import Foundation
 
+/// A primary life value (e.g., Health, Growth) used to align work.
 public struct Value: Identifiable, Codable, Hashable, Sendable {
     public var id: UUID
     public var name: String
@@ -12,6 +13,7 @@ public struct Value: Identifiable, Codable, Hashable, Sendable {
     }
 }
 
+/// A high-level outcome the user wants to achieve.
 public struct Goal: Identifiable, Codable, Hashable, Sendable {
     public var id: UUID
     public var name: String
@@ -37,6 +39,7 @@ public struct Goal: Identifiable, Codable, Hashable, Sendable {
     }
 }
 
+/// A collection of related tasks contributing to a goal.
 public struct Epic: Identifiable, Codable, Hashable, Sendable {
     public var id: UUID
     public var goalId: UUID
@@ -62,6 +65,7 @@ public struct Epic: Identifiable, Codable, Hashable, Sendable {
     }
 }
 
+/// A unit of work that can be scheduled.
 public struct Task: Identifiable, Codable, Hashable, Sendable {
     public var id: UUID
     public var epicId: UUID?
@@ -90,6 +94,7 @@ public struct Task: Identifiable, Codable, Hashable, Sendable {
     }
 }
 
+/// Describes when a task should happen (one-off or recurring).
 public struct Schedule: Identifiable, Codable, Hashable, Sendable {
     public var id: UUID
     public var taskId: UUID
@@ -127,6 +132,7 @@ public struct Schedule: Identifiable, Codable, Hashable, Sendable {
     }
 }
 
+/// A concrete, time-bound occurrence derived from a schedule.
 public struct Event: Identifiable, Codable, Hashable, Sendable {
     public var id: UUID
     public var taskId: UUID

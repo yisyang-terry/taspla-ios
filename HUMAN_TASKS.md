@@ -36,8 +36,15 @@ Authoritative place for any manual, non-automatable steps. Keep this file up to 
     ```
 - [ ] Confirm compile succeeds and the app runs to `RootView`.
 
+### CI build on pull requests
+
+- A GitHub Actions workflow runs `xcodebuild` for every PR (and on manual dispatch).
+- Ensure the `Taspla` scheme is present; sharing it in Xcode helps CI discover it:
+  - Product → Scheme → Manage Schemes… → check `Shared` for `Taspla`.
+  - Commit the generated `xcshareddata/xcschemes` files.
+  - If the scheme name changes, update `.github/workflows/ios-pr-build.yml`.
+
 ## Notes
 
 - The legacy demo Xcode project under `terry-code/apps/POCApp` was removed to avoid confusion. Use the root `Taspla.xcodeproj` going forward.
 - Keep `terry-code/samples/POCApp` as a source for drop‑in UI; do not add `POCApp.swift` to the app (it contains a separate `@main`).
-

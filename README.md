@@ -1,6 +1,6 @@
 # Taspla
 
-Native iOS app (SwiftUI) for values‑aligned planning. This repo now has two parts:
+Taspla (TASk PLAnner) is a native iOS app (SwiftUI) for values‑aligned planning. This repo now has two parts:
 
 - `Taspla.xcodeproj` + `Taspla/` — the Xcode app project scaffolded from Xcode 16
 - `terry-code/` — prior code and docs moved here:

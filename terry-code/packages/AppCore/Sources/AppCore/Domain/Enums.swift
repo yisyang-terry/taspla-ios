@@ -1,5 +1,6 @@
 import Foundation
 
+/// Lifecycle state for a goal.
 public enum GoalStatus: String, Codable, CaseIterable, Sendable {
     case planned
     case active
@@ -8,6 +9,7 @@ public enum GoalStatus: String, Codable, CaseIterable, Sendable {
     case cancelled
 }
 
+/// Kanban-style status for a task.
 public enum TaskStatus: String, Codable, CaseIterable, Sendable {
     case backlog
     case open
@@ -16,12 +18,14 @@ public enum TaskStatus: String, Codable, CaseIterable, Sendable {
     case blocked
 }
 
+/// Supported recurrence units.
 public enum FrequencyType: String, Codable, CaseIterable, Sendable {
     case daily
     case weekly
     case monthly
 }
 
+/// Recurrence descriptor. `interval` is clamped to at least 1.
 public struct Frequency: Codable, Hashable, Sendable {
     public var type: FrequencyType
     public var interval: Int

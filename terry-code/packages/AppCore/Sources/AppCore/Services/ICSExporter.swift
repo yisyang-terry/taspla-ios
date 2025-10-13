@@ -1,8 +1,18 @@
 import Foundation
 
+/// Exports events to iCalendar (ICS) format.
+///
+/// Conforms to RFC 5545 basics. Lines are conservatively folded at 73
+/// characters to stay under the 75-octet limit once CRLF and UTF-8 are
+/// considered.
 public struct ICSExporter: Sendable {
     public init() {}
 
+    /// Render a set of events as an ICS vCalendar string.
+    /// - Parameters:
+    ///   - events: Events to export (order is preserved as given).
+    ///   - summary: Closure that returns the SUMMARY for each event.
+    ///   - description: Optional closure for DESCRIPTION; defaults to notes.
     public func export(
         events: [Event],
         summary: (Event) -> String,
@@ -28,9 +38,9 @@ public struct ICSExporter: Sendable {
                 lines.append("DTSTART:\(formatUTC(ev.start))")
                 lines.append("DTEND:\(formatUTC(ev.end))")
             }
-            lines.append("SUMMARY:\(escape(summary(ev)))")
+            lines += fold("SUMMARY:\(escape(summary(ev)))")
             if let desc = description(ev), !desc.isEmpty {
-                lines.append("DESCRIPTION:\(escape(desc))")
+                lines += fold("DESCRIPTION:\(escape(desc))")
             }
             lines.append("END:VEVENT")
         }
@@ -61,5 +71,30 @@ public struct ICSExporter: Sendable {
             .replacingOccurrences(of: ";", with: "\\;")
             .replacingOccurrences(of: ",", with: "\\,")
             .replacingOccurrences(of: "\n", with: "\\n")
+    }
+
+    // RFC 5545 section 3.1: Lines should be folded to 75 octets.
+    // We conservatively fold at 73 UTF-16 scalar characters.
+    private func fold(_ line: String, limit: Int = 73) -> [String] {
+        guard line.count > limit else { return [line] }
+        var result: [String] = []
+        var start = line.startIndex
+        while start < line.endIndex {
+            let end = line.index(start, offsetBy: limit, limitedBy: line.endIndex) ?? line.endIndex
+            result.append(String(line[start..<end]))
+            start = end
+            if start < line.endIndex {
+                // Prepend a single space to continuation lines
+                let remaining = String(line[start...])
+                if remaining.count <= limit {
+                    result.append(" " + remaining)
+                    break
+                } else {
+                    result.append(" " + String(remaining.prefix(limit)))
+                    start = line.index(start, offsetBy: limit, limitedBy: line.endIndex) ?? line.endIndex
+                }
+            }
+        }
+        return result
     }
 }
